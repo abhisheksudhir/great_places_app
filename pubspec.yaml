@@ -25,6 +25,16 @@ dependencies:
     sdk: flutter
   provider: ^4.1.3
   image_picker: ^0.6.7+1
+  path_provider: ^1.6.10
+  path: ^1.6.4 #change this later
+
+#   great_places_app] flutter pub get
+# Running "flutter pub get" in great_places_app...                
+# Because every version of flutter_test from sdk depends on path 1.6.4 and great_places_app depends on path ^1.7.0, flutter_test from sdk is forbidden.
+
+# So, because great_places_app depends on flutter_test any from sdk, version solving failed.
+# pub get failed (1; So, because great_places_app depends on flutter_test any from sdk, version solving failed.)
+# exit code 1
 
 
   # The following adds the Cupertino Icons font to your application.
