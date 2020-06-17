@@ -32,6 +32,7 @@ dependencies:
   google_maps_flutter: ^0.5.28+1
   mapbox_gl: ^0.7.0
   flutter_map: ^0.9.0
+  http: ^0.12.1
 
 #   great_places_app] flutter pub get
 # Running "flutter pub get" in great_places_app...                
