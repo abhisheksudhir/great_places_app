@@ -35,9 +35,11 @@ class _MapScreenState extends State<MapScreen> {
   latlon.LatLng _pickedLocation;
 
   void _selectLocation(latlon.LatLng position) {
-    setState(() {
-      _pickedLocation = position;
-    });
+    if (widget.isSelecting) {
+      setState(() {
+        _pickedLocation = position;
+      });
+    }
   }
 
   @override
@@ -66,15 +68,20 @@ class _MapScreenState extends State<MapScreen> {
       //     zoom: 16,
       //   ),
       //   onTap: widget.isSelecting ? _selectLocation : null,
-      //   markers: _pickedLocation == null
+      //   markers: (_pickedLocation == null && widget.isSelecting)
       //       ? null
       //       : {
       //           Marker(
       //             markerId: MarkerId('m1'),
-      //             position: _pickedLocation,
+      //             position: _pickedLocation ??
+      //                  LatLng(
+      //                             widget.initialLocation.latitude,
+      //                             widget.initialLocation.longitude,
+      //                           ),
       //           ),
       //         },
       // ),
+
       // body: MapboxMap(
       //   initialCameraPosition: CameraPosition(
       //     target: LatLng(
@@ -92,9 +99,7 @@ class _MapScreenState extends State<MapScreen> {
             widget.initialLocation.longitude,
           ),
           zoom: 16,
-          onTap: widget.isSelecting
-              ? _selectLocation
-              : () => print('no location selected'),
+          onTap: _selectLocation,
         ),
         layers: [
           TileLayerOptions(
@@ -106,27 +111,32 @@ class _MapScreenState extends State<MapScreen> {
                 'id': 'mapbox.mapbox-streets-v8'
               }),
           MarkerLayerOptions(
-              markers: _pickedLocation == null
+              markers: (_pickedLocation == null && widget.isSelecting)
                   ? [
-                      Marker(
-                        point: latlon.LatLng(
-                          widget.initialLocation.latitude,
-                          widget.initialLocation.longitude,
-                        ),
-                        builder: (ctx) => Container(
-                          child: Icon(
-                            Icons.location_on,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
+                      // Marker(
+                      //   point: latlon.LatLng(
+                      //     widget.initialLocation.latitude,
+                      //     widget.initialLocation.longitude,
+                      //   ),
+                      //   builder: (ctx) => Container(
+                      //     child: Icon(
+                      //       Icons.location_on,
+                      //       color: Colors.red,
+                      //     ),
+                      //   ),
+                      // ),
                     ]
                   : [
                       Marker(
-                        point: latlon.LatLng(
-                          _pickedLocation.latitude,
-                          _pickedLocation.longitude,
-                        ),
+                        point: _pickedLocation == null
+                            ? latlon.LatLng(
+                                widget.initialLocation.latitude,
+                                widget.initialLocation.longitude,
+                              )
+                            : latlon.LatLng(
+                                _pickedLocation.latitude,
+                                _pickedLocation.longitude,
+                              ),
                         builder: (ctx) => Container(
                           child: Icon(
                             Icons.location_on,
