@@ -1,6 +1,12 @@
 # great_places_app
 
-A new Flutter project.
+An app which lets you put images and save locations of great/favorite places. It is using mapbox for maps but it can also use google maps. Also you can view your saved locations and their position on the map.
+
+## Screenshots
+![](images/1.PNG)
+![](images/2.PNG)
+![](images/3.PNG)
+![](images/4.PNG)
 
 ## Getting Started
 
